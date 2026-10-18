@@ -1,0 +1,13 @@
+{
+  "estado": "CORRECTO",
+  "pruebas": [
+    "TCP: dos clientes reales, mayúsculas con tildes y salida independiente",
+    "UDP: dos puertos de origen, espacios, datagrama vacío y salir sin respuesta",
+    "Chat: identificación, envío bidireccional, [YO], sin eco al emisor y cierre independiente",
+    "Visor: código fuente real, copia al portapapeles y cuatro integrantes",
+    "Material: guía original y los tres temas disponibles como PDF",
+    "Panel: rechaza archivos fuera de la lista y mensajes a un cliente cerrado",
+    "Diseño: 390, 768, 1024, 1280 y 1536 px sin desbordamiento horizontal; grupo e instrucciones accesibles en móvil"
+  ],
+  "errores_navegador": []
+}

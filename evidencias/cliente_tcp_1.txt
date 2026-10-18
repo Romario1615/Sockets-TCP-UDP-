@@ -1,0 +1,9 @@
+Cliente TCP conectado a 127.0.0.1:12345
+Escribe un mensaje o salir para terminar.
+[ENVIADO] hola servidor
+[SERVIDOR] HOLA SERVIDOR
+[ENVIADO] área de redes
+[SERVIDOR] ÁREA DE REDES
+[ENVIADO] salir
+[SERVIDOR] Conexion TCP cerrada.
+Conexion TCP cerrada por el servidor.

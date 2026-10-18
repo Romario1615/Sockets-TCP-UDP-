@@ -1,0 +1,382 @@
+{
+  "fecha_utc": "2026-10-17T17:10:27.115Z",
+  "node": "v24.19.0",
+  "estado": "CORRECTO",
+  "error": null,
+  "verificaciones": [
+    {
+      "nombre": "TCP: devuelve el mensaje en mayúsculas",
+      "esperado": true,
+      "observado": true,
+      "resultado": "CORRECTO"
+    },
+    {
+      "nombre": "TCP: dos clientes reciben sus respuestas",
+      "esperado": [
+        true,
+        true
+      ],
+      "observado": [
+        true,
+        true
+      ],
+      "resultado": "CORRECTO"
+    },
+    {
+      "nombre": "Cliente TCP 1: termina con salir",
+      "esperado": 0,
+      "observado": 0,
+      "resultado": "CORRECTO"
+    },
+    {
+      "nombre": "TCP: salir solo cierra al cliente que lo solicita",
+      "esperado": true,
+      "observado": true,
+      "resultado": "CORRECTO"
+    },
+    {
+      "nombre": "Cliente TCP 2: termina con salir",
+      "esperado": 0,
+      "observado": 0,
+      "resultado": "CORRECTO"
+    },
+    {
+      "nombre": "TCP: conserva tildes y separa mensajes fragmentados",
+      "esperado": [
+        true,
+        true
+      ],
+      "observado": [
+        true,
+        true
+      ],
+      "resultado": "CORRECTO"
+    },
+    {
+      "nombre": "UDP: cuenta tres palabras en hola desde udp",
+      "esperado": true,
+      "observado": true,
+      "resultado": "CORRECTO"
+    },
+    {
+      "nombre": "UDP: los clientes tienen puertos de origen distintos",
+      "esperado": true,
+      "observado": true,
+      "resultado": "CORRECTO"
+    },
+    {
+      "nombre": "UDP: ignora espacios adicionales",
+      "esperado": true,
+      "observado": true,
+      "resultado": "CORRECTO"
+    },
+    {
+      "nombre": "UDP: un mensaje vacío tiene cero palabras",
+      "esperado": true,
+      "observado": true,
+      "resultado": "CORRECTO"
+    },
+    {
+      "nombre": "UDP: salir no produce respuesta en 300 ms de observación",
+      "esperado": 0,
+      "observado": 0,
+      "resultado": "CORRECTO"
+    },
+    {
+      "nombre": "UDP: el servidor sigue atendiendo después de salir",
+      "esperado": "Numero de palabras: 4",
+      "observado": "Numero de palabras: 4",
+      "resultado": "CORRECTO"
+    },
+    {
+      "nombre": "Cliente UDP 1: termina con salir",
+      "esperado": 0,
+      "observado": 0,
+      "resultado": "CORRECTO"
+    },
+    {
+      "nombre": "Cliente UDP 2: termina con salir",
+      "esperado": 0,
+      "observado": 0,
+      "resultado": "CORRECTO"
+    },
+    {
+      "nombre": "Chat: identifica el socket por el primer mensaje",
+      "esperado": [
+        true,
+        true
+      ],
+      "observado": [
+        true,
+        true
+      ],
+      "resultado": "CORRECTO"
+    },
+    {
+      "nombre": "Chat: hay comunicación en ambos sentidos",
+      "esperado": [
+        true,
+        true
+      ],
+      "observado": [
+        true,
+        true
+      ],
+      "resultado": "CORRECTO"
+    },
+    {
+      "nombre": "Chat: el emisor muestra su mensaje con [YO]",
+      "esperado": [
+        true,
+        true
+      ],
+      "observado": [
+        true,
+        true
+      ],
+      "resultado": "CORRECTO"
+    },
+    {
+      "nombre": "Chat: broadcast excluye al emisor",
+      "esperado": [
+        false,
+        false
+      ],
+      "observado": [
+        false,
+        false
+      ],
+      "resultado": "CORRECTO"
+    },
+    {
+      "nombre": "Cliente Ana: termina con salir",
+      "esperado": 0,
+      "observado": 0,
+      "resultado": "CORRECTO"
+    },
+    {
+      "nombre": "Chat: la salida de Ana no desconecta a Luis",
+      "esperado": false,
+      "observado": false,
+      "resultado": "CORRECTO"
+    },
+    {
+      "nombre": "Cliente Luis: termina con salir",
+      "esperado": 0,
+      "observado": 0,
+      "resultado": "CORRECTO"
+    }
+  ],
+  "capturas": [
+    {
+      "archivo": "01_tcp_un_cliente",
+      "titulo": "TCP: comunicación con un cliente",
+      "descripcion": "El cliente envía hola servidor y recibe HOLA SERVIDOR.",
+      "procesos": [
+        {
+          "nombre": "Servidor TCP",
+          "archivo": "tcp_server.js",
+          "comando": "node tcp_server.js",
+          "pid": 4936,
+          "salida": "Servidor TCP escuchando en 127.0.0.1:12345\n[CONEXION] 127.0.0.1:61116. Clientes activos: 1\n[RECIBIDO 127.0.0.1:61116] hola servidor\n[RESPUESTA 127.0.0.1:61116] HOLA SERVIDOR\n"
+        },
+        {
+          "nombre": "Cliente TCP 1",
+          "archivo": "tcp_cliente.js",
+          "comando": "node tcp_cliente.js",
+          "pid": 25788,
+          "salida": "Cliente TCP conectado a 127.0.0.1:12345\nEscribe un mensaje o salir para terminar.\n[ENVIADO] hola servidor\n[SERVIDOR] HOLA SERVIDOR\n"
+        }
+      ]
+    },
+    {
+      "archivo": "02_tcp_dos_clientes",
+      "titulo": "TCP: dos clientes simultáneos",
+      "descripcion": "El servidor mantiene dos sockets activos y responde a cada origen.",
+      "procesos": [
+        {
+          "nombre": "Servidor TCP",
+          "archivo": "tcp_server.js",
+          "comando": "node tcp_server.js",
+          "pid": 4936,
+          "salida": "Servidor TCP escuchando en 127.0.0.1:12345\n[CONEXION] 127.0.0.1:61116. Clientes activos: 1\n[RECIBIDO 127.0.0.1:61116] hola servidor\n[RESPUESTA 127.0.0.1:61116] HOLA SERVIDOR\n[CONEXION] 127.0.0.1:61117. Clientes activos: 2\n[RECIBIDO 127.0.0.1:61116] área de redes\n[RESPUESTA 127.0.0.1:61116] ÁREA DE REDES\n[RECIBIDO 127.0.0.1:61117] segundo cliente\n[RESPUESTA 127.0.0.1:61117] SEGUNDO CLIENTE\n"
+        },
+        {
+          "nombre": "Cliente TCP 1",
+          "archivo": "tcp_cliente.js",
+          "comando": "node tcp_cliente.js",
+          "pid": 25788,
+          "salida": "Cliente TCP conectado a 127.0.0.1:12345\nEscribe un mensaje o salir para terminar.\n[ENVIADO] hola servidor\n[SERVIDOR] HOLA SERVIDOR\n[ENVIADO] área de redes\n[SERVIDOR] ÁREA DE REDES\n"
+        },
+        {
+          "nombre": "Cliente TCP 2",
+          "archivo": "tcp_cliente.js",
+          "comando": "node tcp_cliente.js",
+          "pid": 7356,
+          "salida": "Cliente TCP conectado a 127.0.0.1:12345\nEscribe un mensaje o salir para terminar.\n[ENVIADO] segundo cliente\n[SERVIDOR] SEGUNDO CLIENTE\n"
+        }
+      ]
+    },
+    {
+      "archivo": "03_tcp_salir",
+      "titulo": "TCP: cierre de un cliente",
+      "descripcion": "El cliente 1 termina; el cliente 2 sigue intercambiando mensajes.",
+      "procesos": [
+        {
+          "nombre": "Servidor TCP",
+          "archivo": "tcp_server.js",
+          "comando": "node tcp_server.js",
+          "pid": 4936,
+          "salida": "Servidor TCP escuchando en 127.0.0.1:12345\n[CONEXION] 127.0.0.1:61116. Clientes activos: 1\n[RECIBIDO 127.0.0.1:61116] hola servidor\n[RESPUESTA 127.0.0.1:61116] HOLA SERVIDOR\n[CONEXION] 127.0.0.1:61117. Clientes activos: 2\n[RECIBIDO 127.0.0.1:61116] área de redes\n[RESPUESTA 127.0.0.1:61116] ÁREA DE REDES\n[RECIBIDO 127.0.0.1:61117] segundo cliente\n[RESPUESTA 127.0.0.1:61117] SEGUNDO CLIENTE\n[RECIBIDO 127.0.0.1:61116] salir\n[CIERRE] 127.0.0.1:61116. Clientes activos: 1\n[RECIBIDO 127.0.0.1:61117] seguimos conectados\n[RESPUESTA 127.0.0.1:61117] SEGUIMOS CONECTADOS\n"
+        },
+        {
+          "nombre": "Cliente TCP 1",
+          "archivo": "tcp_cliente.js",
+          "comando": "node tcp_cliente.js",
+          "pid": 25788,
+          "salida": "Cliente TCP conectado a 127.0.0.1:12345\nEscribe un mensaje o salir para terminar.\n[ENVIADO] hola servidor\n[SERVIDOR] HOLA SERVIDOR\n[ENVIADO] área de redes\n[SERVIDOR] ÁREA DE REDES\n[ENVIADO] salir\n[SERVIDOR] Conexion TCP cerrada.\nConexion TCP cerrada por el servidor.\n"
+        },
+        {
+          "nombre": "Cliente TCP 2",
+          "archivo": "tcp_cliente.js",
+          "comando": "node tcp_cliente.js",
+          "pid": 7356,
+          "salida": "Cliente TCP conectado a 127.0.0.1:12345\nEscribe un mensaje o salir para terminar.\n[ENVIADO] segundo cliente\n[SERVIDOR] SEGUNDO CLIENTE\n[ENVIADO] seguimos conectados\n[SERVIDOR] SEGUIMOS CONECTADOS\n"
+        }
+      ]
+    },
+    {
+      "archivo": "04_udp_un_cliente",
+      "titulo": "UDP: envío y respuesta de un datagrama",
+      "descripcion": "El servidor registra la IP y el puerto del origen y devuelve el conteo.",
+      "procesos": [
+        {
+          "nombre": "Servidor UDP",
+          "archivo": "udp_server.js",
+          "comando": "node udp_server.js",
+          "pid": 28228,
+          "salida": "Servidor UDP escuchando en 127.0.0.1:12346\n[RECIBIDO 127.0.0.1:63756] hola desde udp\n[RESPUESTA 127.0.0.1:63756] Numero de palabras: 3\n"
+        },
+        {
+          "nombre": "Cliente UDP 1",
+          "archivo": "udp_cliente.js",
+          "comando": "node udp_cliente.js",
+          "pid": 18992,
+          "salida": "Cliente UDP listo en 127.0.0.1:63756. Destino: 127.0.0.1:12346\nEscribe un mensaje o salir para terminar.\n[ENVIADO] hola desde udp\n[SERVIDOR 127.0.0.1:12346] Numero de palabras: 3\n"
+        }
+      ]
+    },
+    {
+      "archivo": "05_udp_dos_clientes",
+      "titulo": "UDP: dos clientes con puertos independientes",
+      "descripcion": "Cada respuesta vuelve al cliente que envió el datagrama.",
+      "procesos": [
+        {
+          "nombre": "Servidor UDP",
+          "archivo": "udp_server.js",
+          "comando": "node udp_server.js",
+          "pid": 28228,
+          "salida": "Servidor UDP escuchando en 127.0.0.1:12346\n[RECIBIDO 127.0.0.1:63756] hola desde udp\n[RESPUESTA 127.0.0.1:63756] Numero de palabras: 3\n[RECIBIDO 127.0.0.1:63757] aplicaciones   distribuidas con sockets\n[RESPUESTA 127.0.0.1:63757] Numero de palabras: 4\n[RECIBIDO 127.0.0.1:63756] \n[RESPUESTA 127.0.0.1:63756] Numero de palabras: 0\n"
+        },
+        {
+          "nombre": "Cliente UDP 1",
+          "archivo": "udp_cliente.js",
+          "comando": "node udp_cliente.js",
+          "pid": 18992,
+          "salida": "Cliente UDP listo en 127.0.0.1:63756. Destino: 127.0.0.1:12346\nEscribe un mensaje o salir para terminar.\n[ENVIADO] hola desde udp\n[SERVIDOR 127.0.0.1:12346] Numero de palabras: 3\n[ENVIADO] \n[SERVIDOR 127.0.0.1:12346] Numero de palabras: 0\n"
+        },
+        {
+          "nombre": "Cliente UDP 2",
+          "archivo": "udp_cliente.js",
+          "comando": "node udp_cliente.js",
+          "pid": 14012,
+          "salida": "Cliente UDP listo en 127.0.0.1:63757. Destino: 127.0.0.1:12346\nEscribe un mensaje o salir para terminar.\n[ENVIADO]    aplicaciones   distribuidas con sockets  \n[SERVIDOR 127.0.0.1:12346] Numero de palabras: 4\n"
+        }
+      ]
+    },
+    {
+      "archivo": "06_udp_salir",
+      "titulo": "UDP: salida del cliente y continuidad del servidor",
+      "descripcion": "Los clientes envían salir y cierran sus sockets sin esperar respuesta.",
+      "procesos": [
+        {
+          "nombre": "Servidor UDP",
+          "archivo": "udp_server.js",
+          "comando": "node udp_server.js",
+          "pid": 28228,
+          "salida": "Servidor UDP escuchando en 127.0.0.1:12346\n[RECIBIDO 127.0.0.1:63756] hola desde udp\n[RESPUESTA 127.0.0.1:63756] Numero de palabras: 3\n[RECIBIDO 127.0.0.1:63757] aplicaciones   distribuidas con sockets\n[RESPUESTA 127.0.0.1:63757] Numero de palabras: 4\n[RECIBIDO 127.0.0.1:63756] \n[RESPUESTA 127.0.0.1:63756] Numero de palabras: 0\n[RECIBIDO 127.0.0.1:63758] salir\n[SALIR] No se envia respuesta. El servidor sigue escuchando.\n[RECIBIDO 127.0.0.1:63758] el servidor sigue activo\n[RESPUESTA 127.0.0.1:63758] Numero de palabras: 4\n[RECIBIDO 127.0.0.1:63756] salir\n[SALIR] No se envia respuesta. El servidor sigue escuchando.\n[RECIBIDO 127.0.0.1:63757] salir\n[SALIR] No se envia respuesta. El servidor sigue escuchando.\n"
+        },
+        {
+          "nombre": "Cliente UDP 1",
+          "archivo": "udp_cliente.js",
+          "comando": "node udp_cliente.js",
+          "pid": 18992,
+          "salida": "Cliente UDP listo en 127.0.0.1:63756. Destino: 127.0.0.1:12346\nEscribe un mensaje o salir para terminar.\n[ENVIADO] hola desde udp\n[SERVIDOR 127.0.0.1:12346] Numero de palabras: 3\n[ENVIADO] \n[SERVIDOR 127.0.0.1:12346] Numero de palabras: 0\n[ENVIADO] salir\nSocket UDP del cliente cerrado.\n"
+        },
+        {
+          "nombre": "Cliente UDP 2",
+          "archivo": "udp_cliente.js",
+          "comando": "node udp_cliente.js",
+          "pid": 14012,
+          "salida": "Cliente UDP listo en 127.0.0.1:63757. Destino: 127.0.0.1:12346\nEscribe un mensaje o salir para terminar.\n[ENVIADO]    aplicaciones   distribuidas con sockets  \n[SERVIDOR 127.0.0.1:12346] Numero de palabras: 4\n[ENVIADO] salir\nSocket UDP del cliente cerrado.\n"
+        }
+      ]
+    },
+    {
+      "archivo": "07_chat_dos_usuarios",
+      "titulo": "Chat TCP: servidor y dos clientes identificados",
+      "descripcion": "Ana y Luis intercambian mensajes. Cada receptor ve el nombre del emisor; el propio envío lleva [YO].",
+      "procesos": [
+        {
+          "nombre": "Servidor CHAT",
+          "archivo": "chat_server.js",
+          "comando": "node chat_server.js",
+          "pid": 21748,
+          "salida": "Servidor CHAT escuchando en 127.0.0.1:12347\n[CONEXION] Ana (127.0.0.1:61119). Usuarios: 1\n[CONEXION] Luis (127.0.0.1:61120). Usuarios: 2\n[MENSAJE] Ana: Hola Luis\n[MENSAJE] Luis: Hola Ana\n"
+        },
+        {
+          "nombre": "Cliente Ana",
+          "archivo": "chat_cliente.js",
+          "comando": "node chat_cliente.js Ana",
+          "pid": 28708,
+          "salida": "Cliente CHAT conectado a 127.0.0.1:12347 como Ana\nEscribe un mensaje o salir para terminar.\n[SISTEMA] Bienvenido, Ana.\n[SISTEMA] Luis se conecto.\n[YO] Hola Luis\n[Luis] Hola Ana\n"
+        },
+        {
+          "nombre": "Cliente Luis",
+          "archivo": "chat_cliente.js",
+          "comando": "node chat_cliente.js Luis",
+          "pid": 11900,
+          "salida": "Cliente CHAT conectado a 127.0.0.1:12347 como Luis\nEscribe un mensaje o salir para terminar.\n[SISTEMA] Bienvenido, Luis.\n[Ana] Hola Luis\n[YO] Hola Ana\n"
+        }
+      ]
+    },
+    {
+      "archivo": "08_chat_salir",
+      "titulo": "Chat TCP: desconexión de un usuario",
+      "descripcion": "El servidor elimina el socket de Ana del Map y continúa atendiendo a Luis.",
+      "procesos": [
+        {
+          "nombre": "Servidor CHAT",
+          "archivo": "chat_server.js",
+          "comando": "node chat_server.js",
+          "pid": 21748,
+          "salida": "Servidor CHAT escuchando en 127.0.0.1:12347\n[CONEXION] Ana (127.0.0.1:61119). Usuarios: 1\n[CONEXION] Luis (127.0.0.1:61120). Usuarios: 2\n[MENSAJE] Ana: Hola Luis\n[MENSAJE] Luis: Hola Ana\n[CIERRE] Ana. Usuarios: 1\n[MENSAJE] Luis: sigo en el chat\n"
+        },
+        {
+          "nombre": "Cliente Ana",
+          "archivo": "chat_cliente.js",
+          "comando": "node chat_cliente.js Ana",
+          "pid": 28708,
+          "salida": "Cliente CHAT conectado a 127.0.0.1:12347 como Ana\nEscribe un mensaje o salir para terminar.\n[SISTEMA] Bienvenido, Ana.\n[SISTEMA] Luis se conecto.\n[YO] Hola Luis\n[Luis] Hola Ana\n[YO] salir\n[SISTEMA] Hasta luego.\nConexion del chat cerrada.\n"
+        },
+        {
+          "nombre": "Cliente Luis",
+          "archivo": "chat_cliente.js",
+          "comando": "node chat_cliente.js Luis",
+          "pid": 11900,
+          "salida": "Cliente CHAT conectado a 127.0.0.1:12347 como Luis\nEscribe un mensaje o salir para terminar.\n[SISTEMA] Bienvenido, Luis.\n[Ana] Hola Luis\n[YO] Hola Ana\n[SISTEMA] Ana salio.\n[YO] sigo en el chat\n"
+        }
+      ]
+    }
+  ]
+}

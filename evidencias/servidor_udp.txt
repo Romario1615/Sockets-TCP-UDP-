@@ -1,0 +1,15 @@
+Servidor UDP escuchando en 127.0.0.1:12346
+[RECIBIDO 127.0.0.1:63756] hola desde udp
+[RESPUESTA 127.0.0.1:63756] Numero de palabras: 3
+[RECIBIDO 127.0.0.1:63757] aplicaciones   distribuidas con sockets
+[RESPUESTA 127.0.0.1:63757] Numero de palabras: 4
+[RECIBIDO 127.0.0.1:63756] 
+[RESPUESTA 127.0.0.1:63756] Numero de palabras: 0
+[RECIBIDO 127.0.0.1:63758] salir
+[SALIR] No se envia respuesta. El servidor sigue escuchando.
+[RECIBIDO 127.0.0.1:63758] el servidor sigue activo
+[RESPUESTA 127.0.0.1:63758] Numero de palabras: 4
+[RECIBIDO 127.0.0.1:63756] salir
+[SALIR] No se envia respuesta. El servidor sigue escuchando.
+[RECIBIDO 127.0.0.1:63757] salir
+[SALIR] No se envia respuesta. El servidor sigue escuchando.

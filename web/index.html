@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Laboratorio de sockets · Aplicaciones Distribuidas · ESPE</title>
+  <link rel="icon" href="/espe.png" type="image/png">
+  <link rel="stylesheet" href="/estilos.css">
+  <script src="/interfaz.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="Universidad de las Fuerzas Armadas ESPE"><img src="/espe.png" alt="ESPE Universidad de las Fuerzas Armadas. Innovación para la excelencia" width="500" height="138"></a>
+      <div class="course-id">
+        <strong>Aplicaciones Distribuidas</strong>
+        <span>Práctica 1 · Sockets TCP/UDP · NRC 37869 · Nivel 7</span>
+      </div>
+      <nav class="header-links" aria-label="Recursos">
+        <button class="link-button" id="instructions-button">Instrucciones</button>
+        <button class="link-button" id="theory-button">Material de clase</button>
+        <button class="link-button" id="team-button">Integrantes</button>
+        <button class="link-button" id="mobile-team-button" hidden>Integrantes</button>
+      </nav>
+    </div>
+    <div class="header-rule"></div>
+  </header>
+
+  <main>
+    <div class="docente-line">Docente: <strong>Ing. Luis Alberto Castillo Salinas, Mgtr.</strong><span class="sep">|</span><span class="entorno"><i></i>Entorno local · 127.0.0.1</span></div>
+
+    <nav class="tabs" aria-label="Modalidades del laboratorio" role="tablist">
+      <button class="nav-item active" data-modo="tcp" role="tab" aria-current="page"><span class="tab-num">1</span><span class="tab-text"><strong>Conexión TCP</strong><small>Partes 1 y 2</small></span></button>
+      <button class="nav-item" data-modo="udp" role="tab"><span class="tab-num">2</span><span class="tab-text"><strong>Datagramas UDP</strong><small>Partes 3 y 4</small></span></button>
+      <button class="nav-item" data-modo="chat" role="tab"><span class="tab-num">3</span><span class="tab-text"><strong>Chat grupal TCP</strong><small>Actividad adicional</small></span></button>
+    </nav>
+
+    <section class="workspace-header">
+      <div class="title-block">
+        
+        <h1 id="mode-title">Mensajes en mayúsculas</h1>
+        <p class="lead" id="mode-description">Conecta dos clientes y comprueba cómo el servidor responde a cada mensaje.</p>
+        <p class="eyebrow meta-line"><span class="protocol-tag" id="protocol-tag">TCP</span><span id="part-label">PARTES 1 Y 2 DE LA GUÍA</span></p>
+      </div>
+      <div class="workspace-actions">
+        <button class="button secondary" id="code-button">Ver código</button>
+        <button class="button primary" id="start-button">Iniciar servidor</button>
+        <button class="button danger" id="stop-button" disabled>Detener</button>
+      </div>
+    </section>
+
+    <div class="alert" id="error-banner" role="alert" hidden></div>
+
+    <section class="status-strip" aria-label="Estado de la práctica">
+      <div class="status-cell">
+        <span class="status-label">Servidor</span>
+        <strong class="status-value"><i class="metric-dot" id="server-dot"></i><span id="server-status">Sin iniciar</span></strong>
+        <small id="server-detail">Listo para comenzar</small>
+      </div>
+      <div class="status-cell">
+        <span class="status-label">Dirección</span>
+        <strong class="status-value mono" id="address-chip">127.0.0.1 : 12345</strong>
+        <small><span id="metric-protocol">TCP</span> · procesos independientes</small>
+      </div>
+      <div class="status-cell">
+        <span class="status-label">Clientes activos</span>
+        <strong class="status-value"><span id="client-count">0</span><span class="metric-unit"> de 2</span></strong>
+        <small>Conexiones o puertos de origen</small>
+      </div>
+      <div class="status-cell">
+        <span class="status-label">Mensajes recibidos</span>
+        <strong class="status-value" id="message-count">0</strong>
+        <small>Registrados por el servidor</small>
+      </div>
+    </section>
+
+    <div class="section-bar"><h2>Consolas del laboratorio</h2><span class="section-hint">Salida real de los programas Node.js</span></div>
+
+    <section class="terminal-grid" aria-label="Servidor y dos clientes">
+      <article class="terminal-card server-card">
+        <header class="terminal-heading"><div class="role">Servidor</div><div class="heading-main"><h3>Servidor</h3><span class="file-label" id="server-file">tcp_server.js</span></div><span class="connection-badge" id="server-badge">Sin iniciar</span></header>
+        <div class="console-toolbar"><span id="server-pid">CONSOLA DEL SERVIDOR</span></div>
+        <pre class="console empty-console" id="server-log" tabindex="0">Inicia el servidor para escuchar mensajes.</pre>
+        <div class="server-bottom"><p id="server-purpose">Transforma cada mensaje recibido a mayúsculas.</p></div>
+      </article>
+
+      <article class="terminal-card client-card">
+        <header class="terminal-heading"><div class="role">01</div><div class="heading-main"><h3 id="client1-title">Cliente 1</h3><span class="file-label" id="client1-file">tcp_cliente.js</span></div><span class="connection-badge" id="client1-badge">Desconectado</span></header>
+        <div class="client-connect"><label class="name-field" id="client1-name-label" hidden><span>Usuario</span><input id="client1-name" value="Romario" maxlength="40" autocomplete="off"></label><button class="connect-button" id="client1-connect" disabled>Conectar cliente</button><button class="exit-button" id="client1-exit" disabled>Salir</button></div>
+        <div class="console-toolbar"><span id="client1-pid">CONSOLA DEL CLIENTE</span></div>
+        <pre class="console empty-console" id="client1-log" tabindex="0">Conecta este cliente para enviar un mensaje.</pre>
+        <form class="message-form" data-cliente="1"><label class="sr-only" for="client1-message">Mensaje del cliente 1</label><input id="client1-message" placeholder="Escribe un mensaje..." autocomplete="off" maxlength="1000" disabled><button class="send-button" id="client1-send" disabled>Enviar</button></form>
+        <div class="client-footer"><button class="example-button" data-cliente="1">Insertar ejemplo</button><span id="client1-note">El servidor responde en mayúsculas.</span></div>
+      </article>
+
+      <article class="terminal-card client-card">
+        <header class="terminal-heading"><div class="role">02</div><div class="heading-main"><h3 id="client2-title">Cliente 2</h3><span class="file-label" id="client2-file">tcp_cliente.js</span></div><span class="connection-badge" id="client2-badge">Desconectado</span></header>
+        <div class="client-connect"><label class="name-field" id="client2-name-label" hidden><span>Usuario</span><input id="client2-name" value="Jersson" maxlength="40" autocomplete="off"></label><button class="connect-button" id="client2-connect" disabled>Conectar cliente</button><button class="exit-button" id="client2-exit" disabled>Salir</button></div>
+        <div class="console-toolbar"><span id="client2-pid">CONSOLA DEL CLIENTE</span></div>
+        <pre class="console empty-console" id="client2-log" tabindex="0">Conecta un segundo cliente para comparar.</pre>
+        <form class="message-form" data-cliente="2"><label class="sr-only" for="client2-message">Mensaje del cliente 2</label><input id="client2-message" placeholder="Escribe un mensaje..." autocomplete="off" maxlength="1000" disabled><button class="send-button" id="client2-send" disabled>Enviar</button></form>
+        <div class="client-footer"><button class="example-button" data-cliente="2">Insertar ejemplo</button><span id="client2-note">Mantiene su propia conexión.</span></div>
+      </article>
+    </section>
+
+    <section class="practice-path" aria-labelledby="path-title">
+      <h2 id="path-title">Procedimiento</h2>
+      <ol class="steps">
+        <li id="step1"><span class="step-num">1</span><div><strong>Iniciar el servidor</strong><small>Abre el puerto de escucha</small></div></li>
+        <li id="step2"><span class="step-num">2</span><div><strong>Conectar los clientes</strong><small>Dos procesos independientes</small></div></li>
+        <li id="step3"><span class="step-num">3</span><div><strong>Intercambiar mensajes</strong><small id="step3-detail">Comprueba la respuesta</small></div></li>
+        <li id="step4"><span class="step-num">4</span><div><strong>Probar la salida</strong><small>Escribe salir en un cliente</small></div></li>
+      </ol>
+    </section>
+
+    <section class="concept-card"><span class="concept-label">Fundamento</span><p id="concept-text">TCP mantiene una conexión entre cada cliente y el servidor. Cada respuesta vuelve por el socket del cliente que envió el mensaje.</p><button id="concept-button">Consultar los temas</button></section>
+
+    <footer class="workspace-footer"><span>Universidad de las Fuerzas Armadas ESPE · Departamento de Ciencias de la Computación · Aplicaciones Distribuidas</span><span>Práctica 1 · NRC 37869 · Docente: Ing. Luis Alberto Castillo Salinas</span></footer>
+  </main>
+
+  <dialog id="team-dialog" class="dialog team-dialog"><div class="dialog-header"><div><h2>Integrantes del laboratorio</h2></div><button class="dialog-close" data-cerrar="team-dialog" aria-label="Cerrar integrantes">×</button></div><div id="team-list" class="team-list"></div><p class="dialog-note">Práctica 1 · Sockets TCP/UDP · NRC 37869<br>Docente: Ing. Luis Alberto Castillo Salinas, Mgtr.</p></dialog>
+  <dialog id="code-dialog" class="dialog code-dialog"><div class="dialog-header"><div><h2>Código fuente de la práctica</h2></div><button class="dialog-close" data-cerrar="code-dialog" aria-label="Cerrar código">×</button></div><div class="code-controls"><select id="code-file" aria-label="Archivo de código"><option>tcp_server.js</option><option>tcp_cliente.js</option><option>udp_server.js</option><option>udp_cliente.js</option><option>chat_server.js</option><option>chat_cliente.js</option></select><button id="copy-code" class="button secondary">Copiar código</button></div><pre class="source-code" id="source-code"></pre><p class="dialog-note">Son los mismos programas que ejecuta el panel. Solo utilizan módulos incorporados de Node.js.</p></dialog>
+  <dialog id="instructions-dialog" class="dialog instructions-dialog"><div class="dialog-header"><div><h2>Realiza la práctica paso a paso</h2></div><button class="dialog-close" data-cerrar="instructions-dialog" aria-label="Cerrar instrucciones">×</button></div><ol class="instructions-list"><li><strong>Inicia el servidor de la modalidad elegida.</strong><p>Espera a que aparezca el estado «Escuchando».</p></li><li><strong>Conecta el cliente 1 y después el cliente 2.</strong><p>En el chat, indica primero el nombre de cada usuario.</p></li><li><strong>Escribe mensajes y revisa las tres consolas.</strong><p>TCP responde en mayúsculas; UDP cuenta palabras; el chat reenvía el mensaje a los demás usuarios.</p></li><li><strong>Escribe salir o pulsa Salir en un cliente.</strong><p>Comprueba que el servidor y el otro cliente siguen activos.</p></li></ol><div class="material-links"><h3>Material de la asignatura</h3><a href="/material/guia" target="_blank" rel="noopener">Guía original · Sockets TCP/UDP</a><a href="/material/1" target="_blank" rel="noopener">Tema 1 · Modelo cliente-servidor</a><a href="/material/2" target="_blank" rel="noopener">Tema 2 · Concurrencia y eventos</a><a href="/material/3" target="_blank" rel="noopener">Tema 3 · Sockets y comunicación</a></div><p class="dialog-note">El panel facilita el manejo de los procesos. También puedes ejecutar los seis archivos directamente en terminales, como indica LEEME.md.</p></dialog>
+  <div class="toast" id="toast" role="status" hidden></div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+Servidor CHAT escuchando en 127.0.0.1:12347
+[CONEXION] Ana (127.0.0.1:61119). Usuarios: 1
+[CONEXION] Luis (127.0.0.1:61120). Usuarios: 2
+[MENSAJE] Ana: Hola Luis
+[MENSAJE] Luis: Hola Ana
+[CIERRE] Ana. Usuarios: 1
+[MENSAJE] Luis: sigo en el chat
+[CIERRE] Luis. Usuarios: 0

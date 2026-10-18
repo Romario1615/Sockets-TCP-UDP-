@@ -1,0 +1,8 @@
+Cliente UDP listo en 127.0.0.1:63756. Destino: 127.0.0.1:12346
+Escribe un mensaje o salir para terminar.
+[ENVIADO] hola desde udp
+[SERVIDOR 127.0.0.1:12346] Numero de palabras: 3
+[ENVIADO] 
+[SERVIDOR 127.0.0.1:12346] Numero de palabras: 0
+[ENVIADO] salir
+Socket UDP del cliente cerrado.

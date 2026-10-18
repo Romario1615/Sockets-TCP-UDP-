@@ -1,0 +1,6 @@
+Cliente UDP listo en 127.0.0.1:63757. Destino: 127.0.0.1:12346
+Escribe un mensaje o salir para terminar.
+[ENVIADO]    aplicaciones   distribuidas con sockets  
+[SERVIDOR 127.0.0.1:12346] Numero de palabras: 4
+[ENVIADO] salir
+Socket UDP del cliente cerrado.

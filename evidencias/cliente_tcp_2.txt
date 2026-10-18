@@ -1,0 +1,9 @@
+Cliente TCP conectado a 127.0.0.1:12345
+Escribe un mensaje o salir para terminar.
+[ENVIADO] segundo cliente
+[SERVIDOR] SEGUNDO CLIENTE
+[ENVIADO] seguimos conectados
+[SERVIDOR] SEGUIMOS CONECTADOS
+[ENVIADO] salir
+[SERVIDOR] Conexion TCP cerrada.
+Conexion TCP cerrada por el servidor.

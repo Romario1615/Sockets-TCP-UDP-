@@ -1,0 +1,9 @@
+Cliente CHAT conectado a 127.0.0.1:12347 como Ana
+Escribe un mensaje o salir para terminar.
+[SISTEMA] Bienvenido, Ana.
+[SISTEMA] Luis se conecto.
+[YO] Hola Luis
+[Luis] Hola Ana
+[YO] salir
+[SISTEMA] Hasta luego.
+Conexion del chat cerrada.
